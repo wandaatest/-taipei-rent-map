@@ -67,7 +67,7 @@ function mountMap() {
     attributionControl: false,
   });
 
-  instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
+  instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-left');
   instance.addControl(
     new maplibregl.AttributionControl({
       compact: true,
@@ -137,7 +137,7 @@ onBeforeUnmount(() => {
 <template>
   <section class="w-full">
     <div>
-      <div class="editorial-card relative overflow-hidden">
+      <div class="relative overflow-hidden">
         <div ref="mapContainer" class="map-frame relative min-h-[76vh] w-full lg:min-h-[84vh] xl:min-h-[calc(100vh-180px)]" />
 
         <div class="pointer-events-none absolute inset-x-0 top-4 z-20 px-4 sm:px-6">
@@ -207,20 +207,19 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-:deep(.maplibregl-ctrl-bottom-right) {
-  right: 16px;
-  bottom: 52px;
-}
-
 :deep(.maplibregl-ctrl-bottom-left) {
-  left: 16px;
-  bottom: 12px;
+  left: 0;
+  bottom: 10px;
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
 }
 
 :deep(.maplibregl-ctrl-group) {
   border: 1px solid rgba(126, 84, 72, 0.12);
   border-radius: 0;
   box-shadow: 0 18px 50px rgba(78, 53, 42, 0.12);
+  order: 1;
 }
 
 :deep(.maplibregl-ctrl-group button) {
@@ -234,6 +233,7 @@ onBeforeUnmount(() => {
   border-radius: 0;
   color: rgba(31, 26, 23, 0.72);
   margin: 0;
+  order: 2;
 }
 
 :deep(.maplibregl-ctrl-attrib a) {
