@@ -57,6 +57,10 @@ defineProps<{
             <dt class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">特色早餐店</dt>
             <dd class="mt-3 block text-base leading-6 text-ink">{{ neighborhood.breakfast }}</dd>
           </div>
+          <div class="min-h-[88px]">
+            <dt class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">大學生生活區域</dt>
+            <dd class="mt-3 block text-base leading-6 text-ink">{{ neighborhood.studentArea }}</dd>
+          </div>
         </div>
 
         <div class="border-t border-rosewood/8 pt-5">

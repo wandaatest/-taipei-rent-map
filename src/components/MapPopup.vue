@@ -66,9 +66,13 @@ defineProps<{
             <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">特色早餐店</span>
             <p class="mt-3 text-base leading-6 text-ink">{{ neighborhood.breakfast }}</p>
           </div>
+          <div class="min-h-[88px]">
+            <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">大學生生活區域</span>
+            <p class="mt-3 text-base leading-6 text-ink">{{ neighborhood.studentArea }}</p>
+          </div>
         </div>
 
-        <div class="border-t border-rosewood/8 pt-5">
+        <div class="border-t border-rosewood/8 pb-3 pt-5 sm:pb-4">
           <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">居住名人</span>
           <p class="mt-3 text-base leading-7 text-ink">{{ neighborhood.notableResident }}</p>
         </div>

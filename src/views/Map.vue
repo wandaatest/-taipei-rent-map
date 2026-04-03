@@ -146,7 +146,7 @@ onBeforeUnmount(() => {
               <button
                 v-for="neighborhood in neighborhoods"
                 :key="`header-${neighborhood.id}`"
-                class="flex min-w-0 items-center justify-center gap-2 border-r border-rosewood/8 px-2 py-2 text-center transition last:border-r-0 sm:px-3"
+                class="flex min-w-0 items-center justify-center gap-2 border-r border-rosewood/8 px-2 py-2 text-center transition last:border-r-0 sm:px-3 xl:justify-start xl:text-left"
                 :class="
                   activeId === neighborhood.id
                     ? 'bg-white/92 text-rosewood/88 shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.52)]'
@@ -154,11 +154,16 @@ onBeforeUnmount(() => {
                 "
                 @click="selectNeighborhood(neighborhood.id)"
               >
-                <span class="flex min-w-0 items-center gap-1.5">
+                <span class="flex min-w-0 items-center gap-1.5 xl:items-start">
                   <span class="h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
-                  <strong class="block min-w-0 text-[12px] font-medium leading-4 tracking-[0.03em] sm:text-[13px]">
-                    {{ neighborhood.shortName }}
-                  </strong>
+                  <span class="min-w-0">
+                    <strong class="block min-w-0 text-[12px] font-medium leading-4 tracking-[0.03em] sm:text-[13px]">
+                      {{ neighborhood.shortName }}
+                    </strong>
+                    <span class="mt-1 hidden text-[11px] leading-4 text-ink/42 xl:block">
+                      {{ neighborhood.location.landmark }}
+                    </span>
+                  </span>
                 </span>
               </button>
             </div>

@@ -18,6 +18,7 @@ export interface Neighborhood {
   cafe: string;
   selectShop: string;
   breakfast: string;
+  studentArea: string;
   notableResident: string;
   description: string;
   tags: string[];
