@@ -5,31 +5,31 @@ import { neighborhoods } from '@/utils/recommendation';
 
 const heroImages = [
   {
-    src: '/images/cecelia-chang-c9j4LbVfYB8-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/cecelia-chang-c9j4LbVfYB8-unsplash.jpg`,
     photographer: 'Cecelia Chang',
   },
   {
-    src: '/images/eric-barbeau-Y18Z6_8oQDk-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/eric-barbeau-Y18Z6_8oQDk-unsplash.jpg`,
     photographer: 'Eric Barbeau',
   },
   {
-    src: '/images/eric-barbeau-rJ1igIZDcAI-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/eric-barbeau-rJ1igIZDcAI-unsplash.jpg`,
     photographer: 'Eric Barbeau',
   },
   {
-    src: '/images/h-co-XF2wVQavn1I-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/h-co-XF2wVQavn1I-unsplash.jpg`,
     photographer: 'H Co',
   },
   {
-    src: '/images/james-hunt-vB9MXOO4UdI-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/james-hunt-vB9MXOO4UdI-unsplash.jpg`,
     photographer: 'James Hunt',
   },
   {
-    src: '/images/john-chen-kXISESiJCC0-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/john-chen-kXISESiJCC0-unsplash.jpg`,
     photographer: 'John Chen',
   },
   {
-    src: '/images/mao-jiang-1u-Ar4mNbdg-unsplash.jpg',
+    src: `${import.meta.env.BASE_URL}images/mao-jiang-1u-Ar4mNbdg-unsplash.jpg`,
     photographer: 'Mao Jiang',
   },
 ] as const;
