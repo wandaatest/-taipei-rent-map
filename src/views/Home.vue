@@ -4,55 +4,62 @@ import { neighborhoods } from '@/utils/recommendation';
 </script>
 
 <template>
-  <section class="grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
-    <div class="pt-4">
+  <section class="grid gap-10 border-b border-rosewood/10 pb-14 pt-4 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+    <div class="max-w-4xl">
       <p class="section-label">Taipei Living Match</p>
-      <h1 class="max-w-3xl font-display text-5xl leading-tight text-ink sm:text-6xl">
-        不是找最便宜的房子，是找最像你的台北生活
+      <p class="mb-5 text-sm uppercase tracking-[0.35em] text-rosewood/55">Issue 01. Taipei Her Atlas</p>
+      <h1 class="max-w-4xl font-display text-5xl leading-[1.04] text-ink sm:text-6xl lg:text-7xl">
+        不是找最便宜的房子，
+        <span class="block text-rosewood">是找最像你的台北生活</span>
       </h1>
       <p class="mt-6 max-w-2xl text-lg leading-8 text-ink/68">
-        用 5 題生活風格測驗，找到更適合你的台北生活圈。這不是房仲網站，而是一張把租金、氛圍與個性放在一起看的女子圖鑑。
+        用 5 題生活風格測驗，把租金、街區氣味與生活節奏放在同一張地圖上。這不是房仲資料庫，而是一份偏向生活編輯視角的台北居住提案。
       </p>
 
-      <div class="mt-8 flex flex-wrap gap-4">
-        <RouterLink
-          to="/quiz"
-          class="editorial-button"
-        >
+      <div class="mt-10 flex flex-wrap gap-4">
+        <RouterLink to="/quiz" class="editorial-button">
           開始測看看
         </RouterLink>
-        <RouterLink
-          to="/map"
-          class="editorial-button-secondary"
-        >
+        <RouterLink to="/map" class="editorial-button-secondary">
           先看地圖
         </RouterLink>
       </div>
+
+      <div class="mt-12 grid max-w-3xl gap-4 border-t border-rosewood/10 pt-6 sm:grid-cols-3">
+        <div>
+          <p class="text-xs uppercase tracking-[0.22em] text-rosewood/55">Quiz</p>
+          <p class="mt-2 text-sm leading-7 text-ink/72">5 題生活風格測驗，算出最適合你的生活圈。</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.22em] text-rosewood/55">Rent Mood</p>
+          <p class="mt-2 text-sm leading-7 text-ink/72">不是只看價格，而是一起看氛圍與生活感。</p>
+        </div>
+        <div>
+          <p class="text-xs uppercase tracking-[0.22em] text-rosewood/55">Map View</p>
+          <p class="mt-2 text-sm leading-7 text-ink/72">用地圖快速比較 6 個生活圈的個性差異。</p>
+        </div>
+      </div>
     </div>
 
-    <aside class="editorial-card overflow-hidden p-6 sm:p-8">
-      <div class="flex items-center justify-between gap-4">
-        <div>
-          <p class="text-xs uppercase tracking-[0.22em] text-rosewood/60">MVP Focus</p>
-          <h2 class="mt-2 font-display text-3xl text-ink">6 個生活圈</h2>
-        </div>
-        <span class="editorial-chip">
-          quiz + map
-        </span>
-      </div>
+    <aside class="relative min-h-[420px] border border-rosewood/10 bg-white/55 p-6 shadow-editorial">
+      <div class="absolute left-6 top-6 h-40 w-24 border border-rosewood/10 bg-[#f3e4e0]/60" />
+      <div class="absolute right-8 top-8 h-52 w-36 border border-rosewood/10 bg-[#ead8d2]" />
+      <div class="absolute bottom-8 left-10 h-44 w-44 border border-rosewood/10 bg-[#efe7e0]" />
+      <div class="absolute bottom-14 right-6 h-28 w-32 border border-rosewood/10 bg-[#e6d6ce]" />
 
-      <div class="mt-8 grid gap-3 text-sm text-ink/70">
-        <div class="flex items-center justify-between border-b border-rosewood/10 pb-3">
-          <span>人格推薦</span>
-          <strong class="font-medium text-ink">Top 1 + Top 2</strong>
+      <div class="relative z-10 ml-auto flex h-full max-w-[18rem] flex-col justify-between border-l border-rosewood/10 pl-6">
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-rosewood/60">Editorial Note</p>
+          <p class="mt-4 font-display text-4xl leading-tight text-ink">
+            台北不是只有
+            <span class="block">貴或便宜。</span>
+          </p>
         </div>
-        <div class="flex items-center justify-between border-b border-rosewood/10 pb-3">
-          <span>租金視角</span>
-          <strong class="font-medium text-ink">區間假資料</strong>
-        </div>
-        <div class="flex items-center justify-between pb-3">
-          <span>地圖互動</span>
-          <strong class="font-medium text-ink">Marker Popup</strong>
+
+        <div class="border-t border-rosewood/10 pt-4">
+          <p class="text-sm leading-7 text-ink/68">
+            你可能在中山找到散步靈感，也可能在景美找回呼吸感。這份 MVP 先讓你從生活感出發，而不是先被租金嚇退。
+          </p>
         </div>
       </div>
     </aside>

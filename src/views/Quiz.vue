@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, nextTick, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import QuizQuestion from '@/components/QuizQuestion.vue';
 import { useQuizStore } from '@/stores/quiz';
@@ -7,6 +7,7 @@ import { quizQuestions } from '@/utils/recommendation';
 
 const router = useRouter();
 const { answers, setAnswer, resetAnswers } = useQuizStore();
+const submitButtonRef = ref<HTMLButtonElement | null>(null);
 
 const progress = computed(() => `${answers.value.filter(Boolean).length} / ${quizQuestions.length}`);
 const isComplete = computed(() => answers.value.filter(Boolean).length === quizQuestions.length);
@@ -17,6 +18,34 @@ function submitQuiz() {
   }
 
   router.push('/result');
+}
+
+async function handleSelect(questionIndex: number, optionId: string) {
+  setAnswer(questionIndex, optionId);
+
+  await nextTick();
+
+  const nextQuestion = document.getElementById(`quiz-question-${questionIndex + 2}`);
+
+  if (nextQuestion) {
+    nextQuestion.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+    return;
+  }
+
+  if (answers.value.filter(Boolean).length === quizQuestions.length) {
+    window.setTimeout(() => {
+      submitQuiz();
+    }, 180);
+    return;
+  }
+
+  submitButtonRef.value?.scrollIntoView({
+    behavior: 'smooth',
+    block: 'center',
+  });
 }
 </script>
 
@@ -37,17 +66,22 @@ function submitQuiz() {
     </div>
 
     <div class="space-y-6">
-      <QuizQuestion
+      <div
         v-for="(question, index) in quizQuestions"
+        :id="`quiz-question-${question.id}`"
         :key="question.id"
-        :question="question"
-        :selected-option-id="answers[index]"
-        @select="setAnswer(index, $event)"
-      />
+      >
+        <QuizQuestion
+          :question="question"
+          :selected-option-id="answers[index]"
+          @select="handleSelect(index, $event)"
+        />
+      </div>
     </div>
 
     <div class="mt-8 flex flex-wrap items-center gap-4">
       <button
+        ref="submitButtonRef"
         class="editorial-button disabled:cursor-not-allowed disabled:border-ink/35 disabled:bg-ink/35"
         :disabled="!isComplete"
         @click="submitQuiz"

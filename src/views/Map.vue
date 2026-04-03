@@ -10,7 +10,7 @@ const mapContainer = ref<HTMLDivElement | null>(null);
 const map = ref<MapLibreMap | null>(null);
 const markers = new Map<string, Marker>();
 
-const STADIA_STYLE_URL = 'https://tiles.stadiamaps.com/styles/alidade_smooth.json';
+const CARTO_STYLE_URL = 'https://basemaps.cartocdn.com/gl/positron-gl-style/style.json';
 
 const activeNeighborhood = computed(
   () => neighborhoods.find((neighborhood) => neighborhood.id === activeId.value) ?? neighborhoods[0],
@@ -64,7 +64,7 @@ function mountMap() {
 
   const instance = new maplibregl.Map({
     container: mapContainer.value,
-    style: STADIA_STYLE_URL,
+    style: CARTO_STYLE_URL,
     center: [121.5435, 25.0418],
     zoom: 11.2,
     attributionControl: false,
@@ -74,7 +74,7 @@ function mountMap() {
   instance.addControl(
     new maplibregl.AttributionControl({
       compact: true,
-      customAttribution: 'Taipei Her Map',
+      customAttribution: 'Taipei Her Map · © CARTO · © OpenStreetMap contributors',
     }),
     'bottom-right',
   );
@@ -150,7 +150,7 @@ onBeforeUnmount(() => {
         <div class="flex items-center justify-between border-b border-rosewood/10 px-5 py-4">
           <div>
             <p class="text-xs uppercase tracking-[0.22em] text-rosewood/60">Map Layer</p>
-            <p class="mt-1 text-sm text-ink/70">Stadia Maps Alidade Smooth</p>
+            <p class="mt-1 text-sm text-ink/70">CARTO Positron</p>
           </div>
           <span class="editorial-chip">Free Basemap</span>
         </div>
@@ -190,7 +190,7 @@ onBeforeUnmount(() => {
         <div class="editorial-card p-6">
           <p class="mb-3 text-xs uppercase tracking-[0.22em] text-rosewood/60">Map Note</p>
           <p class="text-sm leading-7 text-ink/68">
-            底圖資料來自免費 OSM 系圖層，正式上線時記得保留 attribution。之後你把每區正式街區與照片給我，我就能把這頁改成完整生活圈地圖。
+            底圖改為公開可用的 CARTO Positron，較適合 GitHub Pages 這種純靜態部署。之後你把每區正式街區與照片給我，我就能把這頁改成完整生活圈地圖。
           </p>
         </div>
       </div>
