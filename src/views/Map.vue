@@ -6,6 +6,8 @@ import MapPopup from '@/components/MapPopup.vue';
 import { neighborhoods } from '@/utils/recommendation';
 
 const activeId = ref(neighborhoods[0]?.id ?? '');
+const popupOpen = ref(true);
+const popupExpanded = ref(false);
 const mapContainer = ref<HTMLDivElement | null>(null);
 const map = ref<MapLibreMap | null>(null);
 const markers = new Map<string, Marker>();
@@ -47,12 +49,7 @@ function updateMarkers() {
     }
 
     button.addEventListener('click', () => {
-      activeId.value = neighborhood.id;
-      map.value?.flyTo({
-        center: [neighborhood.location.lng, neighborhood.location.lat],
-        zoom: 13.4,
-        essential: true,
-      });
+      selectNeighborhood(neighborhood.id);
     });
   });
 }
@@ -70,13 +67,13 @@ function mountMap() {
     attributionControl: false,
   });
 
-  instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right');
+  instance.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'bottom-right');
   instance.addControl(
     new maplibregl.AttributionControl({
       compact: true,
       customAttribution: 'Taipei Her Map · © CARTO · © OpenStreetMap contributors',
     }),
-    'bottom-right',
+    'bottom-left',
   );
 
   neighborhoods.forEach((neighborhood) => {
@@ -86,12 +83,7 @@ function mountMap() {
 
     const button = markerElement.querySelector<HTMLButtonElement>('button[data-id]');
     button?.addEventListener('click', () => {
-      activeId.value = neighborhood.id;
-      instance.flyTo({
-        center: [neighborhood.location.lng, neighborhood.location.lat],
-        zoom: 13.4,
-        essential: true,
-      });
+      selectNeighborhood(neighborhood.id);
     });
 
     const marker = new maplibregl.Marker({
@@ -119,6 +111,13 @@ function focusNeighborhood() {
   updateMarkers();
 }
 
+function selectNeighborhood(neighborhoodId: string) {
+  activeId.value = neighborhoodId as typeof activeId.value;
+  popupOpen.value = true;
+  popupExpanded.value = false;
+  focusNeighborhood();
+}
+
 onMounted(() => {
   mountMap();
 });
@@ -136,64 +135,86 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section>
-    <div class="mb-8">
-      <p class="section-label">Rent Map</p>
-      <h1 class="font-display text-5xl text-ink">台北女子圖鑑租屋地圖</h1>
+  <section class="w-full">
+    <div>
+      <div class="editorial-card relative overflow-hidden">
+        <div ref="mapContainer" class="map-frame relative min-h-[76vh] w-full lg:min-h-[84vh] xl:min-h-[calc(100vh-180px)]" />
 
-      <div class="mt-8">
-        <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/50">Area List</p>
-        <div class="grid border-b border-rosewood/10 md:grid-cols-3 lg:grid-cols-6">
-          <button
-            v-for="neighborhood in neighborhoods"
-            :key="`header-${neighborhood.id}`"
-            class="flex min-w-0 flex-col items-start gap-2 px-4 py-3 text-left transition"
-            :class="
-              activeId === neighborhood.id
-                ? 'bg-transparent text-rosewood/88 shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.52)]'
-                : 'bg-transparent text-ink/70 hover:text-rosewood/78 hover:shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.18)]'
-            "
-            @click="
-              activeId = neighborhood.id;
-              focusNeighborhood();
-            "
-          >
-            <span class="flex min-w-0 items-start gap-2">
-              <span class="mt-[0.42rem] h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
-              <span class="min-w-0">
-                <strong class="block text-[13px] font-medium leading-5 tracking-[0.04em]">{{ neighborhood.shortName }}</strong>
-                <span class="block text-[11px] leading-4 text-ink/42">{{ neighborhood.location.landmark }}</span>
-              </span>
-            </span>
-          </button>
+        <div class="pointer-events-none absolute inset-x-0 top-4 z-20 px-4 sm:px-6">
+          <div class="pointer-events-auto w-full">
+            <div class="inline-grid w-full overflow-hidden border border-white/60 bg-white/80 shadow-editorial backdrop-blur md:grid-cols-3 lg:grid-cols-6">
+              <button
+                v-for="neighborhood in neighborhoods"
+                :key="`header-${neighborhood.id}`"
+                class="flex min-w-0 flex-col items-start gap-2 border-r border-rosewood/8 px-4 py-3 text-left transition last:border-r-0"
+                :class="
+                  activeId === neighborhood.id
+                    ? 'bg-white/92 text-rosewood/88 shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.52)]'
+                    : 'bg-transparent text-ink/70 hover:bg-white/70 hover:text-rosewood/78 hover:shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.18)]'
+                "
+                @click="selectNeighborhood(neighborhood.id)"
+              >
+                <span class="flex min-w-0 items-start gap-2">
+                  <span class="mt-[0.42rem] h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
+                  <span class="min-w-0">
+                    <strong class="block text-[13px] font-medium leading-5 tracking-[0.04em]">{{ neighborhood.shortName }}</strong>
+                    <span class="block text-[11px] leading-4 text-ink/42">{{ neighborhood.location.landmark }}</span>
+                  </span>
+                </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div
+          v-if="popupOpen"
+          class="pointer-events-none absolute bottom-6 right-6 z-20 hidden max-h-[calc(100%-7rem)] w-[420px] xl:block"
+        >
+          <div class="pointer-events-auto relative">
+            <button
+              class="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center border border-rosewood/10 bg-white/90 text-ink/55 transition hover:text-rosewood"
+              @click="popupOpen = false"
+            >
+              ×
+            </button>
+            <MapPopup
+              class="max-h-[calc(100vh-240px)] overflow-y-auto"
+              :neighborhood="activeNeighborhood"
+              :expanded="popupExpanded"
+              @toggle="popupExpanded = !popupExpanded"
+            />
+          </div>
         </div>
       </div>
     </div>
 
-    <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-      <div class="editorial-card overflow-hidden">
-        <div class="flex items-center justify-between border-b border-rosewood/10 px-5 py-4">
-          <div>
-            <p class="text-xs uppercase tracking-[0.22em] text-rosewood/60">Map Layer</p>
-            <p class="mt-1 text-sm text-ink/70">CARTO Positron</p>
-          </div>
-          <span class="editorial-chip">Free Basemap</span>
-        </div>
-
-        <div ref="mapContainer" class="map-frame relative min-h-[560px] w-full" />
-      </div>
-
-      <div class="flex flex-col gap-4">
-        <MapPopup :neighborhood="activeNeighborhood" />
+    <div v-if="popupOpen" class="mt-6 xl:hidden">
+      <div class="relative">
+        <button
+          class="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center border border-rosewood/10 bg-white/90 text-ink/55 transition hover:text-rosewood"
+          @click="popupOpen = false"
+        >
+          ×
+        </button>
+        <MapPopup
+          :neighborhood="activeNeighborhood"
+          :expanded="popupExpanded"
+          @toggle="popupExpanded = !popupExpanded"
+        />
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-:deep(.maplibregl-ctrl-top-right) {
-  top: 16px;
+:deep(.maplibregl-ctrl-bottom-right) {
   right: 16px;
+  bottom: 52px;
+}
+
+:deep(.maplibregl-ctrl-bottom-left) {
+  left: 16px;
+  bottom: 12px;
 }
 
 :deep(.maplibregl-ctrl-group) {
@@ -212,7 +233,7 @@ onBeforeUnmount(() => {
   border: 1px solid rgba(126, 84, 72, 0.12);
   border-radius: 0;
   color: rgba(31, 26, 23, 0.72);
-  margin: 0 12px 12px 0;
+  margin: 0;
 }
 
 :deep(.maplibregl-ctrl-attrib a) {

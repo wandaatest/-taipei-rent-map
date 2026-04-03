@@ -1,6 +1,17 @@
+<script setup lang="ts">
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
+const isMapPage = computed(() => route.path === '/map');
+</script>
+
 <template>
   <div class="min-h-screen bg-paper text-ink">
-    <div class="mx-auto flex min-h-screen max-w-7xl flex-col px-4 py-6 sm:px-6 lg:px-8">
+    <div
+      class="mx-auto flex min-h-screen flex-col py-6"
+      :class="isMapPage ? 'max-w-none px-0' : 'max-w-7xl px-4 sm:px-6 lg:px-8'"
+    >
       <header class="mb-10 flex items-center justify-between border-b border-rosewood/10 pb-5">
         <RouterLink to="/" class="font-display text-xl tracking-[0.2em] text-rosewood uppercase">
           Taipei Her Map
@@ -12,7 +23,7 @@
         </nav>
       </header>
 
-      <main class="flex-1">
+      <main class="flex-1" :class="isMapPage ? 'px-4 sm:px-6 lg:px-8' : ''">
         <RouterView />
       </main>
     </div>

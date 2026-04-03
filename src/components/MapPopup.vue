@@ -3,6 +3,11 @@ import type { Neighborhood } from '@/types/app';
 
 defineProps<{
   neighborhood: Neighborhood;
+  expanded?: boolean;
+}>();
+
+const emit = defineEmits<{
+  toggle: [];
 }>();
 </script>
 
@@ -33,7 +38,15 @@ defineProps<{
     </div>
 
     <div class="mt-6 border-t border-rosewood/10 pt-5">
-      <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/55">Living Details</p>
+      <div class="mb-4 flex items-center justify-between gap-4">
+        <p class="text-xs uppercase tracking-[0.22em] text-rosewood/55">Living Details</p>
+        <button
+          class="text-[11px] uppercase tracking-[0.18em] text-rosewood/75 transition hover:text-rosewood"
+          @click="emit('toggle')"
+        >
+          {{ expanded ? '收起資訊' : '展開更多' }}
+        </button>
+      </div>
 
       <div class="grid gap-6 text-sm">
         <div class="px-1">
@@ -43,7 +56,10 @@ defineProps<{
           </strong>
         </div>
 
-        <div class="grid gap-x-6 gap-y-5 border-t border-rosewood/8 pt-5 md:grid-cols-3">
+        <div
+          v-if="expanded"
+          class="grid gap-x-6 gap-y-5 border-t border-rosewood/8 pt-5 md:grid-cols-3"
+        >
           <div class="min-h-[88px]">
             <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">代表市場</span>
             <p class="mt-3 text-base leading-6 text-ink">{{ neighborhood.market }}</p>
@@ -66,7 +82,7 @@ defineProps<{
           </div>
         </div>
 
-        <div class="border-t border-rosewood/8 pt-5">
+        <div v-if="expanded" class="border-t border-rosewood/8 pt-5">
           <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">居住名人</span>
           <p class="mt-3 text-base leading-7 text-ink">{{ neighborhood.notableResident }}</p>
         </div>
