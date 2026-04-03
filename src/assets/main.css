@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #1f1a17;
+  background: #fcfaf7;
+  font-family: "Avenir Next", "PingFang TC", "Noto Sans TC", sans-serif;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.65), rgba(255, 255, 255, 1)),
+    radial-gradient(circle at top left, rgba(243, 228, 224, 0.7), transparent 45%),
+    #fcfaf7;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+#app {
+  min-height: 100vh;
+}
+
+.editorial-card {
+  @apply border border-rosewood/10 bg-white/80 shadow-editorial backdrop-blur;
+}
+
+.section-label {
+  @apply mb-3 inline-flex items-center border border-rosewood/15 px-3 py-1 text-xs uppercase tracking-[0.24em] text-rosewood/75;
+}
+
+.editorial-panel {
+  @apply border border-rosewood/10 bg-sand/75;
+}
+
+.editorial-button {
+  @apply inline-flex items-center justify-center border border-ink bg-ink px-6 py-3 text-sm font-medium text-white transition hover:border-rosewood hover:bg-rosewood;
+}
+
+.editorial-button-secondary {
+  @apply inline-flex items-center justify-center border border-rosewood/20 bg-transparent px-6 py-3 text-sm font-medium text-rosewood transition hover:border-rosewood hover:bg-white;
+}
+
+.editorial-chip {
+  @apply inline-flex items-center border border-rosewood/15 bg-sand px-3 py-1 text-xs uppercase tracking-[0.18em] text-rosewood;
+}

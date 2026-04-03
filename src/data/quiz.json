@@ -1,0 +1,227 @@
+[
+  {
+    "id": 1,
+    "question": "理想的週六早晨，你比較想怎麼開始？",
+    "options": [
+      {
+        "id": "q1-a",
+        "label": "先去咖啡店開電腦，順便把下週工作排好",
+        "description": "有節奏地掌控生活，效率讓你安心。",
+        "weights": {
+          "daan-tech": 4,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 2,
+          "wanhua-ximen": 0,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 1
+        }
+      },
+      {
+        "id": "q1-b",
+        "label": "穿好看一點去逛展、再找間選物店晃晃",
+        "description": "你喜歡生活被美感慢慢填滿。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 4,
+          "xinyi-cityhall": 2,
+          "wanhua-ximen": 2,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 0
+        }
+      },
+      {
+        "id": "q1-c",
+        "label": "睡飽再說，最好下午才出門",
+        "description": "保留空白對你很重要。",
+        "weights": {
+          "daan-tech": 0,
+          "zhongshan-shuanglian": 1,
+          "xinyi-cityhall": 0,
+          "wanhua-ximen": 1,
+          "shilin-tianmu": 3,
+          "wenshan-jingmei-muzha": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "question": "你希望住家附近最常出現的是什麼？",
+    "options": [
+      {
+        "id": "q2-a",
+        "label": "捷運站、健身房、便利的外帶餐",
+        "description": "高機能比浪漫更實用。",
+        "weights": {
+          "daan-tech": 3,
+          "zhongshan-shuanglian": 1,
+          "xinyi-cityhall": 4,
+          "wanhua-ximen": 1,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 0
+        }
+      },
+      {
+        "id": "q2-b",
+        "label": "市場、老店、巷子裡有故事感的小吃",
+        "description": "你會被日常的紋理吸引。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 0,
+          "wanhua-ximen": 4,
+          "shilin-tianmu": 2,
+          "wenshan-jingmei-muzha": 2
+        }
+      },
+      {
+        "id": "q2-c",
+        "label": "樹蔭、公園、安靜一點的住宅街",
+        "description": "你需要環境替你降噪。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 0,
+          "xinyi-cityhall": 1,
+          "wanhua-ximen": 0,
+          "shilin-tianmu": 4,
+          "wenshan-jingmei-muzha": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "question": "如果租金不是唯一條件，你最在意哪件事？",
+    "options": [
+      {
+        "id": "q3-a",
+        "label": "通勤時間短，工作跟生活都要有效率",
+        "description": "你接受忙，但不接受浪費。",
+        "weights": {
+          "daan-tech": 4,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 3,
+          "wanhua-ximen": 1,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 0
+        }
+      },
+      {
+        "id": "q3-b",
+        "label": "走出門就有靈感，街區本身要有風格",
+        "description": "居住感和審美感不能分開。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 4,
+          "xinyi-cityhall": 2,
+          "wanhua-ximen": 3,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 1
+        }
+      },
+      {
+        "id": "q3-c",
+        "label": "希望租金別太壓迫，日子過得鬆一點",
+        "description": "你更重視長期可持續的舒適感。",
+        "weights": {
+          "daan-tech": 0,
+          "zhongshan-shuanglian": 1,
+          "xinyi-cityhall": 0,
+          "wanhua-ximen": 3,
+          "shilin-tianmu": 2,
+          "wenshan-jingmei-muzha": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "question": "你的夜晚通常比較像哪一種？",
+    "options": [
+      {
+        "id": "q4-a",
+        "label": "下班後還想續攤，吃飯、聚會、逛街一條龍",
+        "description": "城市越亮，你越有精神。",
+        "weights": {
+          "daan-tech": 2,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 4,
+          "wanhua-ximen": 3,
+          "shilin-tianmu": 0,
+          "wenshan-jingmei-muzha": 0
+        }
+      },
+      {
+        "id": "q4-b",
+        "label": "散步回家，順便買點宵夜或逛夜市",
+        "description": "你喜歡夜晚還帶一點煙火氣。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 1,
+          "wanhua-ximen": 4,
+          "shilin-tianmu": 3,
+          "wenshan-jingmei-muzha": 2
+        }
+      },
+      {
+        "id": "q4-c",
+        "label": "只想安靜回家，最好附近有舒服的住宅感",
+        "description": "回家感比熱鬧更重要。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 0,
+          "xinyi-cityhall": 0,
+          "wanhua-ximen": 1,
+          "shilin-tianmu": 4,
+          "wenshan-jingmei-muzha": 4
+        }
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "question": "如果朋友形容你的生活態度，最像哪一句？",
+    "options": [
+      {
+        "id": "q5-a",
+        "label": "她很會安排自己，步調清楚而且有目標",
+        "description": "你追求的是成熟而明確的生活輪廓。",
+        "weights": {
+          "daan-tech": 4,
+          "zhongshan-shuanglian": 2,
+          "xinyi-cityhall": 3,
+          "wanhua-ximen": 0,
+          "shilin-tianmu": 1,
+          "wenshan-jingmei-muzha": 1
+        }
+      },
+      {
+        "id": "q5-b",
+        "label": "她很有自己的風格，不想住進無聊的地方",
+        "description": "你希望生活像一本有態度的城市雜誌。",
+        "weights": {
+          "daan-tech": 1,
+          "zhongshan-shuanglian": 4,
+          "xinyi-cityhall": 2,
+          "wanhua-ximen": 4,
+          "shilin-tianmu": 0,
+          "wenshan-jingmei-muzha": 1
+        }
+      },
+      {
+        "id": "q5-c",
+        "label": "她想把日子過穩一點，舒服比炫耀重要",
+        "description": "你需要的是長住感，不是短暫的高潮。",
+        "weights": {
+          "daan-tech": 0,
+          "zhongshan-shuanglian": 1,
+          "xinyi-cityhall": 0,
+          "wanhua-ximen": 2,
+          "shilin-tianmu": 4,
+          "wenshan-jingmei-muzha": 4
+        }
+      }
+    ]
+  }
+]
