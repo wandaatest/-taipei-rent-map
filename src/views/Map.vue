@@ -139,7 +139,7 @@ onBeforeUnmount(() => {
   <section>
     <div class="mb-8">
       <p class="section-label">Rent Map</p>
-      <h1 class="font-display text-5xl text-ink">台北女子圖鑑租金地圖</h1>
+      <h1 class="font-display text-5xl text-ink">台北女子圖鑑租屋地圖</h1>
 
       <div class="mt-8">
         <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/50">Area List</p>
