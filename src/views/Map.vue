@@ -7,7 +7,7 @@ import { neighborhoods } from '@/utils/recommendation';
 
 const activeId = ref(neighborhoods[0]?.id ?? '');
 const popupOpen = ref(true);
-const popupExpanded = ref(false);
+const mobileSheetExpanded = ref(false);
 const mapContainer = ref<HTMLDivElement | null>(null);
 const map = ref<MapLibreMap | null>(null);
 const markers = new Map<string, Marker>();
@@ -114,7 +114,7 @@ function focusNeighborhood() {
 function selectNeighborhood(neighborhoodId: string) {
   activeId.value = neighborhoodId as typeof activeId.value;
   popupOpen.value = true;
-  popupExpanded.value = false;
+  mobileSheetExpanded.value = true;
   focusNeighborhood();
 }
 
@@ -142,11 +142,11 @@ onBeforeUnmount(() => {
 
         <div class="pointer-events-none absolute inset-x-0 top-4 z-20 px-4 sm:px-6">
           <div class="pointer-events-auto w-full">
-            <div class="inline-grid w-full overflow-hidden border border-white/60 bg-white/80 shadow-editorial backdrop-blur md:grid-cols-3 lg:grid-cols-6">
+            <div class="grid w-full grid-cols-6 overflow-hidden border border-white/60 bg-white/80 shadow-editorial backdrop-blur">
               <button
                 v-for="neighborhood in neighborhoods"
                 :key="`header-${neighborhood.id}`"
-                class="flex min-w-0 flex-col items-start gap-2 border-r border-rosewood/8 px-4 py-3 text-left transition last:border-r-0"
+                class="flex min-w-0 items-center justify-center gap-2 border-r border-rosewood/8 px-2 py-2 text-center transition last:border-r-0 sm:px-3"
                 :class="
                   activeId === neighborhood.id
                     ? 'bg-white/92 text-rosewood/88 shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.52)]'
@@ -154,12 +154,11 @@ onBeforeUnmount(() => {
                 "
                 @click="selectNeighborhood(neighborhood.id)"
               >
-                <span class="flex min-w-0 items-start gap-2">
-                  <span class="mt-[0.42rem] h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
-                  <span class="min-w-0">
-                    <strong class="block text-[13px] font-medium leading-5 tracking-[0.04em]">{{ neighborhood.shortName }}</strong>
-                    <span class="block text-[11px] leading-4 text-ink/42">{{ neighborhood.location.landmark }}</span>
-                  </span>
+                <span class="flex min-w-0 items-center gap-1.5">
+                  <span class="h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
+                  <strong class="block min-w-0 text-[12px] font-medium leading-4 tracking-[0.03em] sm:text-[13px]">
+                    {{ neighborhood.shortName }}
+                  </strong>
                 </span>
               </button>
             </div>
@@ -178,29 +177,38 @@ onBeforeUnmount(() => {
               ×
             </button>
             <MapPopup
+              :key="`desktop-${activeId}`"
               class="max-h-[calc(100vh-240px)] overflow-y-auto"
               :neighborhood="activeNeighborhood"
-              :expanded="popupExpanded"
-              @toggle="popupExpanded = !popupExpanded"
             />
           </div>
         </div>
-      </div>
-    </div>
 
-    <div v-if="popupOpen" class="mt-6 xl:hidden">
-      <div class="relative">
-        <button
-          class="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center border border-rosewood/10 bg-white/90 text-ink/55 transition hover:text-rosewood"
-          @click="popupOpen = false"
+        <div
+          v-if="popupOpen"
+          class="pointer-events-none absolute inset-x-0 bottom-0 z-20 xl:hidden"
         >
-          ×
-        </button>
-        <MapPopup
-          :neighborhood="activeNeighborhood"
-          :expanded="popupExpanded"
-          @toggle="popupExpanded = !popupExpanded"
-        />
+          <div
+            class="pointer-events-auto relative transition-[height] duration-500 ease-out"
+            :class="
+              mobileSheetExpanded
+                ? 'h-[33.333vh]'
+                : 'h-[20vh] min-h-[160px] max-h-[220px]'
+            "
+          >
+            <button
+              class="absolute right-3 top-3 z-10 flex h-8 w-8 items-center justify-center border border-rosewood/10 bg-white/90 text-ink/55 transition hover:text-rosewood"
+              @click="mobileSheetExpanded = false"
+            >
+              ×
+            </button>
+            <MapPopup
+              :key="`mobile-${activeId}`"
+              class="h-full overflow-y-auto border-x-0 border-b-0"
+              :neighborhood="activeNeighborhood"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </section>
