@@ -137,12 +137,37 @@ onBeforeUnmount(() => {
 
 <template>
   <section>
-    <div class="mb-8 max-w-3xl">
+    <div class="mb-8">
       <p class="section-label">Rent Map</p>
       <h1 class="font-display text-5xl text-ink">台北女子圖鑑租金地圖</h1>
-      <p class="mt-5 text-lg leading-8 text-ink/68">
-        第一版改成真地圖底圖，先用免費的 OpenStreetMap 系圖層與代表點位，之後再替換成你實拍街區與正式地址。
-      </p>
+
+      <div class="mt-8">
+        <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/50">Area List</p>
+        <div class="grid border-b border-rosewood/10 md:grid-cols-3 lg:grid-cols-6">
+          <button
+            v-for="neighborhood in neighborhoods"
+            :key="`header-${neighborhood.id}`"
+            class="flex min-w-0 flex-col items-start gap-2 px-4 py-3 text-left transition"
+            :class="
+              activeId === neighborhood.id
+                ? 'bg-transparent text-rosewood shadow-[inset_0_-2px_0_0_rgba(126,84,72,0.7)]'
+                : 'bg-transparent text-ink/72 hover:text-rosewood/85 hover:shadow-[inset_0_-2px_0_0_rgba(126,84,72,0.24)]'
+            "
+            @click="
+              activeId = neighborhood.id;
+              focusNeighborhood();
+            "
+          >
+            <span class="flex min-w-0 items-start gap-2">
+              <span class="mt-[0.42rem] h-2 w-2 shrink-0 opacity-70" :style="{ backgroundColor: neighborhood.accent }" />
+              <span class="min-w-0">
+                <strong class="block text-[13px] font-medium leading-5 tracking-[0.04em]">{{ neighborhood.shortName }}</strong>
+                <span class="block text-[11px] leading-4 text-ink/42">{{ neighborhood.location.landmark }}</span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
     </div>
 
     <div class="grid gap-6 lg:grid-cols-[1.15fr_0.85fr]">
@@ -160,39 +185,6 @@ onBeforeUnmount(() => {
 
       <div class="flex flex-col gap-4">
         <MapPopup :neighborhood="activeNeighborhood" />
-
-        <div class="editorial-card p-6">
-          <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/60">Area List</p>
-          <div class="grid gap-3">
-            <button
-              v-for="neighborhood in neighborhoods"
-              :key="`list-${neighborhood.id}`"
-              class="flex items-center justify-between border px-4 py-3 text-left transition"
-              :class="
-                activeId === neighborhood.id
-                  ? 'border-rosewood bg-blush/70 shadow-[inset_3px_0_0_0_rgba(126,84,72,1)]'
-                  : 'border-rosewood/10 bg-white/70 hover:border-rosewood/40'
-              "
-              @click="
-                activeId = neighborhood.id;
-                focusNeighborhood();
-              "
-            >
-              <span>
-                <strong class="block text-sm text-ink">{{ neighborhood.name }}</strong>
-                <span class="text-xs text-ink/55">{{ neighborhood.location.landmark }}</span>
-              </span>
-              <span class="h-3 w-3" :style="{ backgroundColor: neighborhood.accent }" />
-            </button>
-          </div>
-        </div>
-
-        <div class="editorial-card p-6">
-          <p class="mb-3 text-xs uppercase tracking-[0.22em] text-rosewood/60">Map Note</p>
-          <p class="text-sm leading-7 text-ink/68">
-            底圖改為公開可用的 CARTO Positron，較適合 GitHub Pages 這種純靜態部署。之後你把每區正式街區與照片給我，我就能把這頁改成完整生活圈地圖。
-          </p>
-        </div>
       </div>
     </div>
   </section>

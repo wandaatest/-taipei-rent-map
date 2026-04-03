@@ -20,29 +20,35 @@ defineProps<{
         </div>
         <div>
           <p class="font-display text-3xl text-ink">{{ neighborhood.shortName }}</p>
-          <p class="mt-2 text-sm leading-7 text-ink/68">
-            之後可放 {{ neighborhood.street }} 的代表街景照片，這裡先保留給你的實拍素材。
-          </p>
         </div>
       </div>
     </div>
 
-    <div class="mt-4 grid gap-3 text-sm">
-      <div class="editorial-panel px-4 py-3">
-        <span class="block text-ink/45">租金區間</span>
-        <strong class="text-ink">{{ neighborhood.rentRange }}</strong>
-      </div>
-      <div class="editorial-panel px-4 py-3">
-        <span class="block text-ink/45">代表市場</span>
-        <strong class="text-ink">{{ neighborhood.market }}</strong>
-      </div>
-      <div class="editorial-panel px-4 py-3">
-        <span class="block text-ink/45">代表街區</span>
-        <strong class="text-ink">{{ neighborhood.street }}</strong>
-      </div>
-      <div class="editorial-panel px-4 py-3">
-        <span class="block text-ink/45">代表定位</span>
-        <strong class="text-ink">{{ neighborhood.location.landmark }}</strong>
+    <div class="mt-6 border-t border-rosewood/10 pt-5">
+      <p class="mb-4 text-xs uppercase tracking-[0.22em] text-rosewood/55">Living Details</p>
+
+      <div class="grid gap-6 text-sm">
+        <div class="px-1">
+          <span class="block text-[11px] uppercase tracking-[0.2em] text-ink/42">租金區間</span>
+          <strong class="mt-3 block font-display text-3xl leading-tight text-ink">
+            {{ neighborhood.rentRange }}
+          </strong>
+        </div>
+
+        <div class="grid gap-x-6 gap-y-5 border-t border-rosewood/8 pt-5 md:grid-cols-3">
+          <div class="min-h-[88px]">
+            <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">代表市場</span>
+            <strong class="mt-3 block text-base leading-6 text-ink">{{ neighborhood.market }}</strong>
+          </div>
+          <div class="min-h-[88px]">
+            <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">代表街區</span>
+            <strong class="mt-3 block text-base leading-6 text-ink">{{ neighborhood.street }}</strong>
+          </div>
+          <div class="min-h-[88px]">
+            <span class="block text-[11px] uppercase tracking-[0.18em] text-ink/40">代表定位</span>
+            <strong class="mt-3 block text-base leading-6 text-ink">{{ neighborhood.location.landmark }}</strong>
+          </div>
+        </div>
       </div>
     </div>
   </article>
