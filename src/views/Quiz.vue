@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, nextTick, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import QuizQuestion from '@/components/QuizQuestion.vue';
 import { useQuizStore } from '@/stores/quiz';
@@ -19,6 +19,10 @@ function submitQuiz() {
 
   router.push('/result');
 }
+
+onMounted(() => {
+  resetAnswers();
+});
 
 async function handleSelect(questionIndex: number, optionId: string) {
   setAnswer(questionIndex, optionId);

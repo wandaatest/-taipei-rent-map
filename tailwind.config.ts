@@ -10,17 +10,17 @@ export default {
         sans: ['"Avenir Next"', '"PingFang TC"', '"Noto Sans TC"', 'sans-serif'],
       },
       colors: {
-        blush: '#f3e4e0',
+        blush: '#faf0ec',
         ink: '#1f1a17',
-        taupe: '#b39a8b',
-        sand: '#f8f3ee',
-        rosewood: '#7e5448',
+        taupe: '#d4beb2',
+        sand: '#fbf7f3',
+        rosewood: '#b28c7e',
       },
       boxShadow: {
         editorial: '0 18px 50px rgba(78, 53, 42, 0.12)',
       },
       backgroundImage: {
-        paper: 'radial-gradient(circle at top, rgba(243, 228, 224, 0.85), rgba(248, 243, 238, 0.92) 40%, rgba(255, 255, 255, 1) 100%)',
+        paper: 'radial-gradient(circle at top, rgba(246, 236, 232, 0.82), rgba(251, 247, 243, 0.94) 40%, rgba(255, 255, 255, 1) 100%)',
       },
     },
   },

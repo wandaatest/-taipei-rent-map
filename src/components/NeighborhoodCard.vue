@@ -38,7 +38,7 @@ defineProps<{
       <span
         v-for="tag in neighborhood.tags"
         :key="tag"
-        class="border border-rosewood/10 bg-sand px-3 py-1 text-xs text-rosewood"
+        class="bg-sand px-3 py-1 text-xs text-[#c49a88]"
       >
         {{ tag }}
       </span>

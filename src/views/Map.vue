@@ -150,8 +150,8 @@ onBeforeUnmount(() => {
             class="flex min-w-0 flex-col items-start gap-2 px-4 py-3 text-left transition"
             :class="
               activeId === neighborhood.id
-                ? 'bg-transparent text-rosewood shadow-[inset_0_-2px_0_0_rgba(126,84,72,0.7)]'
-                : 'bg-transparent text-ink/72 hover:text-rosewood/85 hover:shadow-[inset_0_-2px_0_0_rgba(126,84,72,0.24)]'
+                ? 'bg-transparent text-rosewood/88 shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.52)]'
+                : 'bg-transparent text-ink/70 hover:text-rosewood/78 hover:shadow-[inset_0_-2px_0_0_rgba(158,120,109,0.18)]'
             "
             @click="
               activeId = neighborhood.id;

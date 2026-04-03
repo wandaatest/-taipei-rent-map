@@ -15,6 +15,10 @@ export interface Neighborhood {
   vibe: string;
   market: string;
   street: string;
+  cafe: string;
+  selectShop: string;
+  breakfast: string;
+  notableResident: string;
   description: string;
   tags: string[];
   accent: string;
