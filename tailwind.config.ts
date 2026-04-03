@@ -6,7 +6,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Iowan Old Style"', '"Noto Serif TC"', 'serif'],
+        display: ['"Noto Serif TC"', '"Iowan Old Style"', 'serif'],
         sans: ['"Avenir Next"', '"PingFang TC"', '"Noto Sans TC"', 'sans-serif'],
       },
       colors: {
