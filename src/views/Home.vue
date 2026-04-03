@@ -1,19 +1,41 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
 import NeighborhoodCard from '@/components/NeighborhoodCard.vue';
 import { neighborhoods } from '@/utils/recommendation';
 
 const heroImages = [
-  '/images/cecelia-chang-c9j4LbVfYB8-unsplash.jpg',
-  '/images/eric-barbeau-Y18Z6_8oQDk-unsplash.jpg',
-  '/images/eric-barbeau-rJ1igIZDcAI-unsplash.jpg',
-  '/images/h-co-XF2wVQavn1I-unsplash.jpg',
-  '/images/james-hunt-vB9MXOO4UdI-unsplash.jpg',
-  '/images/john-chen-kXISESiJCC0-unsplash.jpg',
-  '/images/mao-jiang-1u-Ar4mNbdg-unsplash.jpg',
+  {
+    src: '/images/cecelia-chang-c9j4LbVfYB8-unsplash.jpg',
+    photographer: 'Cecelia Chang',
+  },
+  {
+    src: '/images/eric-barbeau-Y18Z6_8oQDk-unsplash.jpg',
+    photographer: 'Eric Barbeau',
+  },
+  {
+    src: '/images/eric-barbeau-rJ1igIZDcAI-unsplash.jpg',
+    photographer: 'Eric Barbeau',
+  },
+  {
+    src: '/images/h-co-XF2wVQavn1I-unsplash.jpg',
+    photographer: 'H Co',
+  },
+  {
+    src: '/images/james-hunt-vB9MXOO4UdI-unsplash.jpg',
+    photographer: 'James Hunt',
+  },
+  {
+    src: '/images/john-chen-kXISESiJCC0-unsplash.jpg',
+    photographer: 'John Chen',
+  },
+  {
+    src: '/images/mao-jiang-1u-Ar4mNbdg-unsplash.jpg',
+    photographer: 'Mao Jiang',
+  },
 ] as const;
-const heroImageUrl = heroImages[5];
+const heroImageUrl = heroImages[5].src;
 const activeHeroImageIndex = ref(0);
+const activeHeroImage = computed(() => heroImages[activeHeroImageIndex.value] ?? heroImages[0]);
 let heroInterval: number | undefined;
 
 const editorialNotes = [
@@ -41,14 +63,20 @@ onBeforeUnmount(() => {
     <div class="absolute inset-0">
       <div
         v-for="(imageUrl, index) in heroImages"
-        :key="imageUrl"
+        :key="imageUrl.src"
         class="absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-[2400ms] ease-out"
         :class="activeHeroImageIndex === index ? 'opacity-100' : 'opacity-0'"
-        :style="{ backgroundImage: `url(${imageUrl})` }"
+        :style="{ backgroundImage: `url(${imageUrl.src})` }"
       />
     </div>
     <div class="absolute inset-0 bg-[linear-gradient(180deg,rgba(252,248,245,0.7),rgba(252,248,245,0.96))]" />
     <div class="absolute right-0 top-0 hidden h-full w-[44%] bg-[linear-gradient(90deg,rgba(252,248,245,0),rgba(252,248,245,0.16)_12%,rgba(252,248,245,0.62)_38%,rgba(252,248,245,0.88)_100%)] lg:block" />
+    <div class="absolute bottom-4 right-4 z-20 bg-white/52 px-3 py-2 text-[10px] uppercase tracking-[0.18em] text-ink/48 backdrop-blur sm:bottom-6 sm:right-6">
+      <span>Photo by {{ activeHeroImage.photographer }} via </span>
+      <a class="text-rosewood/72 transition hover:text-rosewood" href="https://unsplash.com" target="_blank" rel="noreferrer">
+        Unsplash
+      </a>
+    </div>
 
     <div class="relative z-10 px-4 sm:px-6 lg:px-8">
       <div class="grid gap-10 lg:grid-cols-[minmax(0,1.08fr)_minmax(260px,0.52fr)] lg:items-start">
